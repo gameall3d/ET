@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n11_x6ki" name="BG" src="x6ki4" fileName="grey_panel.png" xy="0,0" size="1280,720" color="#666666"/>
+    <image id="n7_x6ki" name="n7" src="x6ki4" fileName="grey_panel.png" xy="643,328" pivot="0.5,0.5" anchor="true" size="500,376" color="#cccccc">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </image>
+    <component id="n4_x6ki" name="LoginButton" src="x6ki3" fileName="LoginButton.xml" xy="539,391"/>
+    <text id="n5_x6ki" name="n5" xy="574,397" size="119,34" fontSize="24" color="#ffffff" align="center" autoSize="none" text="Login">
+      <relation target="n4_x6ki" sidePair="center-center,middle-middle"/>
+    </text>
+    <text id="n1_x6ki" name="n0" xy="489,235" size="60,38" group="n8_x6ki" fontSize="24" align="center" vAlign="middle" autoSize="none" text="账号"/>
+    <image id="n12_x6ki" name="AccountNameInputBG" src="x6ki4" fileName="grey_panel.png" xy="569,234" size="226,41" group="n8_x6ki"/>
+    <text id="n0_x6ki" name="AccountName" xy="572,235" size="221,38" group="n8_x6ki" fontSize="24" vAlign="middle" autoSize="none" text="" input="true"/>
+    <group id="n8_x6ki" name="AccountNameGroup" xy="489,234" size="306,41"/>
+    <text id="n2_x6ki" name="n2" xy="489,317" size="57,34" group="n10_x6ki" fontSize="24" align="center" autoSize="none" text="密码"/>
+    <image id="n13_x6ki" name="PasswordInputBG" src="x6ki4" fileName="grey_panel.png" xy="569,314" size="226,41" group="n10_x6ki"/>
+    <text id="n3_x6ki" name="Password" xy="572,317" size="219,34" group="n10_x6ki" fontSize="24" vAlign="middle" autoSize="none" text="" input="true" password="true"/>
+    <group id="n10_x6ki" name="PasswordGroup" xy="489,314" size="306,41"/>
+  </displayList>
+</component>

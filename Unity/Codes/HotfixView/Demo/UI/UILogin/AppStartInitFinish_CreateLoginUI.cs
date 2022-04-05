@@ -6,7 +6,7 @@ namespace ET
 	{
 		protected override void Run(EventType.AppStartInitFinish args)
 		{
-			UIHelper.Create(args.ZoneScene, UIType.UILogin, UILayer.Mid).Coroutine();
+			// UIHelper.Create(args.ZoneScene, UIType.UILogin, UILayer.Mid).Coroutine();
 		}
 	}
 }

@@ -1,0 +1,15 @@
+{
+  "name": "FGUI2ET",
+  "displayName": "ET的FGUI代码生成插件",
+  "description": "ET的FGUI代码生成插件",
+  "version": "1.0",
+  "author": {
+    "name": "star"
+  },
+  "icon": "Icon.png",
+  "main": "main.js",
+  "dependencies": {
+    "tsc": "^2.0.4",
+    "typescript": "^4.6.3"
+  }
+}

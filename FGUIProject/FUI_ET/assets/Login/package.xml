@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="3paxr1cx">
+  <resources>
+    <component id="t9ak0" name="Login.xml" path="/" exported="true"/>
+    <image id="x6ki1" name="green_button02.png" path="/"/>
+    <image id="x6ki2" name="green_button03.png" path="/"/>
+    <component id="x6ki3" name="LoginButton.xml" path="/"/>
+    <image id="x6ki4" name="grey_panel.png" path="/" scale="9grid" scale9grid="25,25,50,50"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

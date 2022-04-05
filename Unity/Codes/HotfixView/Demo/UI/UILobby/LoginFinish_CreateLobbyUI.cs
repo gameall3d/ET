@@ -7,6 +7,7 @@ namespace ET
 		protected override void Run(EventType.LoginFinish args)
 		{
 			UIHelper.Create(args.ZoneScene, UIType.UILobby, UILayer.Mid).Coroutine();
+			args.ZoneScene.GetComponent<FUIComponent>().Remove(FUIPackage.Login);
 		}
 	}
 }

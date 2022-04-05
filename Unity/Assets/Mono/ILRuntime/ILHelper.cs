@@ -90,7 +90,46 @@ namespace ET
                     return ((Func<KeyValuePair<int, int>, KeyValuePair<int, int>, int>)act)(x, y);
                 });
             });
-            
+
+            #region FGUI
+
+            appdomain.DelegateManager
+                .RegisterMethodDelegate<System.String, System.String, System.Type, FairyGUI.PackageItem>();
+            appdomain.DelegateManager.RegisterMethodDelegate<FairyGUI.GObject>();
+            appdomain.DelegateManager.RegisterMethodDelegate<FairyGUI.EventContext>();
+
+            appdomain.DelegateManager.RegisterDelegateConvertor<FairyGUI.UIPackage.LoadResourceAsync>((act) =>
+            {
+                return new FairyGUI.UIPackage.LoadResourceAsync((name, extension, type, item) =>
+                {
+                    ((Action<System.String, System.String, System.Type, FairyGUI.PackageItem>)act)(name,
+                        extension, type, item);
+                });
+            });
+            appdomain.DelegateManager.RegisterDelegateConvertor<FairyGUI.UIPackage.CreateObjectCallback>((act) =>
+            {
+                return new FairyGUI.UIPackage.CreateObjectCallback((result) =>
+                {
+                    ((Action<FairyGUI.GObject>)act)(result);
+                });
+            });
+
+            appdomain.DelegateManager.RegisterDelegateConvertor<FairyGUI.EventCallback0>((act) =>
+            {
+                return new FairyGUI.EventCallback0(() => { ((Action)act)(); });
+            });
+
+            appdomain.DelegateManager.RegisterDelegateConvertor<FairyGUI.EventCallback1>((act) =>
+            {
+                return new FairyGUI.EventCallback1((context) =>
+                {
+                    ((Action<FairyGUI.EventContext>)act)(context);
+                });
+            });
+
+
+            #endregion
+
             // 注册适配器
             RegisterAdaptor(appdomain);
             

@@ -274,6 +274,16 @@ namespace ET
             return resource;
         }
 
+        public AssetBundle GetAssetBundle(string abName)
+        {
+            ABInfo abInfo;
+            if (!bundles.TryGetValue(AssetBundleHelper.BundleNameToLower(abName), out abInfo))
+            {
+                throw new Exception($"not found bundle: {abName}");
+            }
+            return abInfo.AssetBundle;
+        }
+
         // 一帧卸载一个包，避免卡死
         public async ETTask UnloadBundleAsync(string assetBundleName, bool unload = true)
         {

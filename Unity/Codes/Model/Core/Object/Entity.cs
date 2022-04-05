@@ -829,6 +829,12 @@ namespace ET
             return entity;
         }
 
+        public Entity RemoveChild(Entity entity)
+        {
+            entity.Parent = null;
+            return entity;
+        }
+
         public T AddChild<T>(bool isFromPool = false) where T : Entity, IAwake
         {
             Type type = typeof (T);
