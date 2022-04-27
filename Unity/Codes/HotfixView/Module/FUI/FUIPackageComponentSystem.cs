@@ -8,6 +8,11 @@ namespace ET
     {
 		public static void AddPackage(this FUIPackageComponent self, string type)
 		{
+			if (self.Packages.ContainsKey(type))
+			{
+				return;
+			}
+			
 			if (Define.IsEditor)
 			{
 				UIPackage uiPackage = UIPackage.AddPackage($"{FUIPackageComponent.FUI_PACKAGE_DIR}/{type}");
@@ -28,15 +33,18 @@ namespace ET
 			}
 		}
 
-		public static async Task AddPackageAsync(this FUIPackageComponent self, string type)
+		public static async ETTask AddPackageAsync(this FUIPackageComponent self, string type)
 		{
+			if (self.Packages.ContainsKey(type))
+			{
+				return;
+			}
+			
 			if (Define.IsEditor)
 			{
-				await Task.CompletedTask;
-
 				UIPackage uiPackage = UIPackage.AddPackage($"{FUIPackageComponent.FUI_PACKAGE_DIR}/{type}");
-
 				self.Packages.Add(type, uiPackage);
+				await ETTask.CompletedTask;
 			}
 			else
 			{

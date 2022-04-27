@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Reflection;
+using FairyGUI;
+using ILRuntime.CLR.Method;
+using ILRuntime.CLR.Utils;
 using ILRuntime.Runtime.Intepreter;
+using ILRuntime.Runtime.Stack;
 using ProtoBuf;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ET
 {
@@ -41,7 +47,10 @@ namespace ET
             list.Add(typeof(ListComponent<ETTask>));
             list.Add(typeof(ListComponent<Vector3>));
             
+            
+            
             // 注册重定向函数
+            FUICLRMethod(appdomain);
 
             // 注册委托
             appdomain.DelegateManager.RegisterMethodDelegate<List<object>>();
@@ -53,8 +62,9 @@ namespace ET
             appdomain.DelegateManager.RegisterMethodDelegate<long, MemoryStream>();
             appdomain.DelegateManager.RegisterMethodDelegate<long, IPEndPoint>();
             appdomain.DelegateManager.RegisterMethodDelegate<ILTypeInstance>();
+            appdomain.DelegateManager.RegisterMethodDelegate<Transform,int>();
             appdomain.DelegateManager.RegisterMethodDelegate<AsyncOperation>();
-            
+
             
             appdomain.DelegateManager.RegisterFunctionDelegate<UnityEngine.Events.UnityAction>();
             appdomain.DelegateManager.RegisterFunctionDelegate<System.Object, ET.ETTask>();
@@ -74,7 +84,7 @@ namespace ET
             appdomain.DelegateManager.RegisterFunctionDelegate<System.Int64, System.Collections.Generic.List<ILRuntime.Runtime.Intepreter.ILTypeInstance>, System.Boolean>();
 
             appdomain.DelegateManager.RegisterMethodDelegate<ET.AService>();
-
+            
             appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((act) =>
             {
                 return new UnityEngine.Events.UnityAction(() =>
@@ -90,13 +100,23 @@ namespace ET
                     return ((Func<KeyValuePair<int, int>, KeyValuePair<int, int>, int>)act)(x, y);
                 });
             });
-
+            
+            appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((act) =>
+            {
+                return new UnityEngine.Events.UnityAction(() =>
+                {
+                    ((Action)act)();
+                });
+            });
+            
             #region FGUI
 
             appdomain.DelegateManager
-                .RegisterMethodDelegate<System.String, System.String, System.Type, FairyGUI.PackageItem>();
+                    .RegisterMethodDelegate<System.String, System.String, System.Type, FairyGUI.PackageItem>();
             appdomain.DelegateManager.RegisterMethodDelegate<FairyGUI.GObject>();
             appdomain.DelegateManager.RegisterMethodDelegate<FairyGUI.EventContext>();
+            appdomain.DelegateManager.RegisterFunctionDelegate<FairyGUI.GComponent>();
+            appdomain.DelegateManager.RegisterMethodDelegate<UnityEngine.EventSystems.BaseEventData>();
 
             appdomain.DelegateManager.RegisterDelegateConvertor<FairyGUI.UIPackage.LoadResourceAsync>((act) =>
             {
@@ -113,6 +133,13 @@ namespace ET
                     ((Action<FairyGUI.GObject>)act)(result);
                 });
             });
+            appdomain.DelegateManager.RegisterDelegateConvertor<FairyGUI.UIObjectFactory.GComponentCreator>((act) =>
+            {
+                return new FairyGUI.UIObjectFactory.GComponentCreator(() =>
+                {
+                    return ((Func<FairyGUI.GComponent>)act)();
+                });
+            });
 
             appdomain.DelegateManager.RegisterDelegateConvertor<FairyGUI.EventCallback0>((act) =>
             {
@@ -126,8 +153,16 @@ namespace ET
                     ((Action<FairyGUI.EventContext>)act)(context);
                 });
             });
+            
+            appdomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction<UnityEngine.EventSystems.BaseEventData>>((act) =>
+            {
+                return new UnityEngine.Events.UnityAction<UnityEngine.EventSystems.BaseEventData>((arg0) =>
+                {
+                    ((Action<UnityEngine.EventSystems.BaseEventData>)act)(arg0);
+                });
+            });
 
-
+            
             #endregion
 
             // 注册适配器
@@ -157,6 +192,59 @@ namespace ET
             appdomain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());
             appdomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());
             appdomain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());
+            
+            appdomain.RegisterCrossBindingAdaptor(new GButtonAdapter());
+            appdomain.RegisterCrossBindingAdaptor(new GLoaderAdapter());
+            appdomain.RegisterCrossBindingAdaptor(new WindowAdapter());
+        }
+        
+        unsafe static void FUICLRMethod (ILRuntime.Runtime.Enviorment.AppDomain appdomain) {
+            BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            MethodBase method;
+            Type[] args;
+            Type type = typeof (FairyGUI.UIObjectFactory);
+            args = new Type[] { typeof (System.String), typeof (System.Type) };
+            method = type.GetMethod ("SetPackageItemExtension", flag, null, args, null);
+            appdomain.RegisterCLRMethodRedirection (method, SetPackageItemExtension_0);
+            
+            args = new Type[] { typeof (System.Type) };
+            method = type.GetMethod ("SetLoaderExtension", flag, null, args, null);
+            appdomain.RegisterCLRMethodRedirection (method, SetLoaderExtension_0);
+        }
+        unsafe static StackObject * SetPackageItemExtension_0 (ILIntepreter __intp, StackObject * __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj) {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject * ptr_of_this_method;
+            StackObject * __ret = ILIntepreter.Minus (__esp, 2);
+
+            ptr_of_this_method = ILIntepreter.Minus (__esp, 1);
+            System.Type @type = (System.Type) typeof (System.Type).CheckCLRTypes (StackObject.ToObject (ptr_of_this_method, __domain, __mStack));
+            __intp.Free (ptr_of_this_method);
+
+            ptr_of_this_method = ILIntepreter.Minus (__esp, 2);
+            System.String @url = (System.String) typeof (System.String).CheckCLRTypes (StackObject.ToObject (ptr_of_this_method, __domain, __mStack));
+            __intp.Free (ptr_of_this_method);
+            
+            FairyGUI.UIObjectFactory.SetPackageItemExtension (@url, () => {
+                return __domain.Instantiate<GComponent> (@type.FullName);
+            });
+            // FairyGUI.UIObjectFactory.SetPackageItemExtension (@url, @type);
+
+            return __ret;
+        }
+        
+        unsafe static StackObject * SetLoaderExtension_0 (ILIntepreter __intp, StackObject * __esp, IList<object> __mStack, CLRMethod __method, bool isNewObj) {
+            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;
+            StackObject * ptr_of_this_method;
+            StackObject * __ret = ILIntepreter.Minus (__esp, 1);
+
+            ptr_of_this_method = ILIntepreter.Minus (__esp, 1);
+            System.Type @type = (System.Type) typeof (System.Type).CheckCLRTypes (StackObject.ToObject (ptr_of_this_method, __domain, __mStack));
+            __intp.Free (ptr_of_this_method);
+            
+            FairyGUI.UIObjectFactory.SetLoaderExtension(() => {
+                return __domain.Instantiate<GLoader> (@type.FullName);
+            });
+            return __ret;
         }
     }
 }

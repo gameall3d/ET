@@ -1,14 +1,14 @@
 //FYI: https://github.com/Tencent/puerts/blob/master/doc/unity/manual.md
 
 import { FairyEditor } from 'csharp';
-import { hotfixViewCodeGenerator } from './HotfixViewCodeGenerator';
+import { fuiCodeGenerator } from './FUICodeGenerator';
 
 function onPublish(handler: FairyEditor.PublishHandler) {
     if (!handler.genCode) return;
     handler.genCode = false; //prevent default output
 
     console.log('Handling gen code in plugin');
-    hotfixViewCodeGenerator.Handle(handler);
+    fuiCodeGenerator.Handle(handler);
     console.log('Handling gen code in plugin end');
 }
 

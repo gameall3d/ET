@@ -81,6 +81,7 @@
     <Compile Include="Codes\HotfixView\Demo\Unit\ChangePosition_SyncGameObjectPos.cs" />
     <Compile Include="Codes\HotfixView\Demo\Unit\ChangeRotation_SyncGameObjectRotation.cs" />
     <Compile Include="Codes\HotfixView\Demo\Unit\GameObjectComponentSystem.cs" />
+    <Compile Include="Codes\HotfixView\Module\FUI\FUIGLoader.cs" />
     <Compile Include="Codes\HotfixView\Module\Resource\GameObjectHelper.cs" />
     <Compile Include="Codes\HotfixView\Module\UI\UIComponentSystem.cs" />
     <Compile Include="Codes\HotfixView\Module\UI\UIEventComponentSystem.cs" />

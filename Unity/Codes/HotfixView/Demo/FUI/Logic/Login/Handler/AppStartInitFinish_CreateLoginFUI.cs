@@ -15,14 +15,7 @@ namespace ET
 		protected async ETTask RunAsync(EventType.AppStartInitFinish args)
 		{
 			Scene zoneScene = args.ZoneScene;
-			await zoneScene.GetComponent<FUIPackageComponent>().AddPackageAsync(FUIPackage.Login);
-			var fuiLogin = await FUI_Login.CreateInstanceAsync(zoneScene);
-
-			fuiLogin.Name = FUI_Login.UIResName;
-			fuiLogin.MakeFullScreen();
-
-			fuiLogin.AddComponent<FUILoginComponent>();
-			zoneScene.GetComponent<FUIComponent>().Add(fuiLogin, true);
+			await zoneScene.GetComponent<FUIComponent>().ShowUIAsync<FUI_Login, FUILoginComponent>(FUI_Login.UIPackageName);
 		}
 	}
 }

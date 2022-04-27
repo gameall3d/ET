@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hotfixViewCodeGenerator = void 0;
+exports.fuiCodeGenerator = void 0;
 const csharp_1 = require("csharp");
 const CodeGenConfig_1 = require("./CodeGenConfig");
 const CodeWriter_1 = require("./CodeWriter");
-class HotfixViewCodeGenerator {
+class FUICodeGenerator {
     settings;
     codePkgName;
     classes;
@@ -311,6 +311,9 @@ class HotfixViewCodeGenerator {
                 logicCodeWriter.endBlock();
                 logicCodeWriter.save(logicComponentClassFilePath);
             }
+            if (!csharp_1.System.IO.Directory.Exists(hotfixViewLogicExporCodePath)) {
+                csharp_1.System.IO.Directory.CreateDirectory(hotfixViewLogicExporCodePath);
+            }
             // 生成System代码
             if (!csharp_1.System.IO.File.Exists(logicSystemClassFilePath)) {
                 let logicAwakeSystemName = logicComponentClassName + "AwakeSystem";
@@ -329,28 +332,35 @@ class HotfixViewCodeGenerator {
         }
     }
                 `, logicAwakeSystemName, logicComponentClassName, logicComponentClassName);
-                logicCodeWriter.writeln(`
+                if (isWindow) {
+                    logicCodeWriter.writeln(`
     public static class %s
     {
         public static void Awake(this %s self)
         {
-            self.%s = self.GetParent<%s>();       
-                `, logicSystemClassName, logicComponentClassName, compPropName, compClassName);
-                if (isWindow) {
-                    logicCodeWriter.writeln(`
+            self.%s = self.GetParent<%s>();      
             self.Window = new Window();
             self.Window.contentPane = self.%s.FGComp;
-                    `, compPropName);
-                }
-                logicCodeWriter.writeln(`
         }
-    }        
-                `);
+    } 
+                `, logicSystemClassName, logicComponentClassName, compPropName, compClassName, compPropName);
+                }
+                else {
+                    logicCodeWriter.writeln(`
+    public static class %s
+    {
+        public static void Awake(this %s self)
+        {
+            self.%s = self.GetParent<%s>();  
+        }
+    }     
+                `, logicSystemClassName, logicComponentClassName, compPropName, compClassName);
+                }
                 logicCodeWriter.endBlock();
                 logicCodeWriter.save(logicSystemClassFilePath);
             }
         }
     }
 }
-const hotfixViewCodeGenerator = new HotfixViewCodeGenerator();
-exports.hotfixViewCodeGenerator = hotfixViewCodeGenerator;
+const fuiCodeGenerator = new FUICodeGenerator();
+exports.fuiCodeGenerator = fuiCodeGenerator;

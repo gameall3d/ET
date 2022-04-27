@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace ET
 {
@@ -9,7 +10,7 @@ namespace ET
 	
 	public class FUI : Entity, IAwake<GObject>
 	{
-		public GObject GObject;
+        public GObject GObject;
 
         public string Name
         {
@@ -142,6 +143,61 @@ namespace ET
             }
 
             return ui;
+        }
+
+        private static GObject CreateGObject(string packageName, string resName)
+        {
+            return UIPackage.CreateObject(packageName, resName);
+        }
+
+        private static void CreateGObjectAsync(string packageName, string resName, UIPackage.CreateObjectCallback result)
+        {
+            UIPackage.CreateObjectAsync(packageName, resName, result);
+        }
+
+        public static T CreateInstance<T>(Entity parent, string packageName, string resName) where T: FUI
+        {
+            return parent.AddChild<T, GObject>(CreateGObject(packageName, resName));
+        }
+        
+        public static ETTask<T> CreateInstanceAsync<T>(Entity parent, string packageName, string resName) where T: FUI
+        {
+            ETTask<T> tcs = ETTask<T>.Create(true);
+            
+            CreateGObjectAsync(packageName, resName, (go) =>
+            {
+                tcs.SetResult(parent.AddChild<T, GObject>(go));
+            });
+
+            return tcs;
+        }
+        
+        /// <summary>
+        /// 仅用于go已经实例化情况下的创建（例如另一个组件引用了此组件）
+        /// </summary>
+        /// <param name="domain"></param>
+        /// <param name="go"></param>
+        /// <returns></returns>
+        public static T Create<T>(Entity parent, GObject go) where T: FUI
+        {
+            return parent.AddChild<T, GObject>(go);
+        }
+        
+        /// <summary>
+        /// 通过此方法获取的FUI，在Dispose时不会释放GObject，需要自行管理（一般在配合FGUI的Pool机制时使用）。
+        /// </summary>
+        public static T GetFormPool<T>(Entity domain, GObject go) where T: FUI
+        {
+            var fui = go.Get<T>();
+        
+            if(fui == null)
+            {
+                fui = Create<T>(domain, go);
+            }
+        
+            fui.isFromFGUIPool = true;
+        
+            return fui;
         }
     }
 }

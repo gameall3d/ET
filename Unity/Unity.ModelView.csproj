@@ -70,6 +70,7 @@
     <Compile Include="Codes\ModelView\Module\FUI\FUIComponent.cs" />
     <Compile Include="Codes\ModelView\Module\FUI\FUIPackageComponent.cs" />
     <Compile Include="Codes\ModelView\Module\FUI\FUIStackComponent.cs" />
+    <Compile Include="Codes\ModelView\Module\FUI\FUIWindowComponent.cs" />
     <Compile Include="Codes\ModelView\Module\FUI\GComponentHelper.cs" />
     <Compile Include="Codes\ModelView\Module\FUI\GObjectHelper.cs" />
     <Compile Include="Codes\ModelView\Module\UI\AUIEvent.cs" />
