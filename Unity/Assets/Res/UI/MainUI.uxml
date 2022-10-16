@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="HPGroup" style="flex-direction: row;">
+        <ui:Label text="HP:" display-tooltip-when-elided="true" style="-unity-text-align: middle-left;" />
+        <ui:ProgressBar name="HPBar" low-value="100" style="max-width: 200px; width: 200px;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -100,7 +100,7 @@ namespace ET
         }
     }
 
-    [ComponentOf(typeof (Unit))]
+    [ComponentOf]
     public class NumericComponent: Entity, IAwake, ITransfer
     {
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
