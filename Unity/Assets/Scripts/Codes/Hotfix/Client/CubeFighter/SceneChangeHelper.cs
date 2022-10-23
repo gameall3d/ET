@@ -15,7 +15,7 @@ namespace CubeFighter.Client
             // 可以订阅这个事件中创建Loading界面
             EventSystem.Instance.Publish(clientScene, new EventType.SceneChangeStart());
             
-            GameUnit unit = UnitFactory.CreatePlayer(currentScene);
+            
 
             EventSystem.Instance.Publish(currentScene, new EventType.SceneChangeFinish());
 

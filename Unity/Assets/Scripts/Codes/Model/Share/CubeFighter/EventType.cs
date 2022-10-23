@@ -8,5 +8,10 @@ namespace CubeFighter.EventType
     {
     }
 
+    public struct AfterCreateGameUnit
+    {
+        public GameUnit GameUnit;
+    }
+
 }
 
