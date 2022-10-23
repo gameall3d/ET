@@ -1,3 +1,4 @@
+using CubeFighter.EventType;
 using ET;
 using ET.Client;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,10 @@ namespace CubeFighter.Client
             // 切换到map场景
 
             await SceneManager.LoadSceneAsync(currentScene.Name);
+            
+            GameUnit unit = UnitFactory.CreatePlayer(currentScene);
+            
+            EventSystem.Instance.Publish(currentScene, new AfterCreateGameUnit(){GameUnit = unit});
         }
     }
 }

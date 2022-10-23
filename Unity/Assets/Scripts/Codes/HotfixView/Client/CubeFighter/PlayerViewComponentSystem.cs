@@ -1,0 +1,27 @@
+using ET;
+using ET.Client;
+using UnityEngine;
+
+namespace CubeFighter.Client
+{
+    [FriendOf(typeof(PlayerViewComponent))]
+    public static class PlayerViewComponentSystem
+    {
+        public class PlayerViewComponentAwakeSystem: AwakeSystem<PlayerViewComponent>
+        {
+            protected override void Awake(PlayerViewComponent self)
+            {
+                self.Awake();
+            }
+        }
+
+
+        public static void Awake(this PlayerViewComponent self)
+        {
+            GameObject playerPrfb = (GameObject)ResourcesComponent.Instance.GetAsset("unit.unity3d", "Player");
+            GameObject go = UnityEngine.Object.Instantiate(playerPrfb, GlobalComponent.Instance.Unit, true);
+            self.UnitRoot = go;
+        }
+    }
+}
+
