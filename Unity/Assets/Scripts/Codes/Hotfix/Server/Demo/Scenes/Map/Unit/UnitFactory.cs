@@ -12,6 +12,8 @@ namespace ET.Server
             {
                 case UnitType.Player:
                 {
+                    var config = cfg.ItemConfigCategory.Instance.Get(10000);
+                    Log.Info($"Test Server Luban Config Item:{config.Id}:{config.Name}");
                     Unit unit = unitComponent.AddChildWithId<Unit, int>(id, 1001);
                     unit.AddComponent<MoveComponent>();
                     unit.Position = new float3(-10, 0, -10);
