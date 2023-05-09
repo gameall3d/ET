@@ -8,8 +8,10 @@ namespace ET.Client
     {
         public override async ETTask<UI> OnCreate(UIComponent uiComponent, UILayer uiLayer)
         {
-            await uiComponent.DomainScene().GetComponent<ResourcesLoaderComponent>().LoadAsync(UIType.UILogin.StringToAB());
-            GameObject bundleGameObject = (GameObject) ResourcesComponent.Instance.GetAsset(UIType.UILogin.StringToAB(), UIType.UILogin);
+            await ETTask.CompletedTask;
+            // await uiComponent.DomainScene().GetComponent<ResourcesLoaderComponent>().LoadAsync(UIType.UILogin.StringToAB());
+            // GameObject bundleGameObject = (GameObject) ResourcesComponent.Instance.GetAsset(UIType.UILogin.StringToAB(), UIType.UILogin);
+            GameObject bundleGameObject = ResComponent.Instance.LoadAssetSync<GameObject>(UIType.UILogin);
             GameObject gameObject = UnityEngine.Object.Instantiate(bundleGameObject, UIEventComponent.Instance.GetLayer((int)uiLayer));
             UI ui = uiComponent.AddChild<UI, string, GameObject>(UIType.UILogin, gameObject);
             ui.AddComponent<UILoginComponent>();
@@ -18,7 +20,9 @@ namespace ET.Client
 
         public override void OnRemove(UIComponent uiComponent)
         {
-            ResourcesComponent.Instance.UnloadBundle(UIType.UILogin.StringToAB());
+            // ResourcesComponent.Instance.UnloadBundle(UIType.UILogin.StringToAB());
+            UI ui = uiComponent.Get(UIType.UILogin);
+            ResComponent.Instance.Release(ui.GameObject);
         }
     }
 }

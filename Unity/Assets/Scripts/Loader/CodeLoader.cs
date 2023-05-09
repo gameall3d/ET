@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
+using YooAsset;
 
 namespace ET
 {
@@ -38,9 +39,15 @@ namespace ET
 				byte[] pdbBytes;
 				if (!Define.IsEditor)
 				{
-					Dictionary<string, UnityEngine.Object> dictionary = AssetsBundleHelper.LoadBundle("code.unity3d");
-					assBytes = ((TextAsset)dictionary["Model.dll"]).bytes;
-					pdbBytes = ((TextAsset)dictionary["Model.pdb"]).bytes;
+					// Dictionary<string, UnityEngine.Object> dictionary = AssetsBundleHelper.LoadBundle("code.unity3d");
+					// assBytes = ((TextAsset)dictionary["Model.dll"]).bytes;
+					// pdbBytes = ((TextAsset)dictionary["Model.pdb"]).bytes;
+					var modelDllRes = YooAssetWrapper.LoadAssetSync<TextAsset>("Model.dll");
+					var modelPdbRes = YooAssetWrapper.LoadAssetSync<TextAsset>("Model.pdb");
+					assBytes = modelDllRes.bytes;
+					pdbBytes = modelPdbRes.bytes;
+					YooAssetWrapper.Release(modelDllRes);
+					YooAssetWrapper.Release(modelPdbRes);
 
 					if (Define.EnableIL2CPP)
 					{
@@ -68,9 +75,15 @@ namespace ET
 			byte[] pdbBytes;
 			if (!Define.IsEditor)
 			{
-				Dictionary<string, UnityEngine.Object> dictionary = AssetsBundleHelper.LoadBundle("code.unity3d");
-				assBytes = ((TextAsset)dictionary["Hotfix.dll"]).bytes;
-				pdbBytes = ((TextAsset)dictionary["Hotfix.pdb"]).bytes;
+				// Dictionary<string, UnityEngine.Object> dictionary = AssetsBundleHelper.LoadBundle("code.unity3d");
+				// assBytes = ((TextAsset)dictionary["Hotfix.dll"]).bytes;
+				// pdbBytes = ((TextAsset)dictionary["Hotfix.pdb"]).bytes;
+				var hotfixDllRes = YooAssetWrapper.LoadAssetSync<TextAsset>("Hotfix.dll");
+				var hotfixPdbRes = YooAssetWrapper.LoadAssetSync<TextAsset>("Hotfix.pdb");
+				assBytes = hotfixDllRes.bytes;
+				pdbBytes = hotfixPdbRes.bytes;
+				YooAssetWrapper.Release(hotfixDllRes);
+				YooAssetWrapper.Release(hotfixPdbRes);
 			}
 			else
 			{

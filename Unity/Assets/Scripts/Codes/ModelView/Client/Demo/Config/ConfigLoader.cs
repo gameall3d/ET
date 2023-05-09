@@ -55,15 +55,24 @@ namespace ET.Client
             }
             else
             {
-                using (Root.Instance.Scene.AddComponent<ResourcesComponent>())
+                // using (Root.Instance.Scene.AddComponent<ResourcesComponent>())
+                // {
+                //     const string configBundleName = "config.unity3d";
+                //     ResourcesComponent.Instance.LoadBundle(configBundleName);
+                //     
+                //     foreach (Type configType in configTypes)
+                //     {
+                //         TextAsset v = ResourcesComponent.Instance.GetAsset(configBundleName, configType.Name) as TextAsset;
+                //         output[configType] = v.bytes;
+                //     }
+                // }
+                using (Root.Instance.Scene.AddComponent<ResComponent>())
                 {
-                    const string configBundleName = "config.unity3d";
-                    ResourcesComponent.Instance.LoadBundle(configBundleName);
-                    
                     foreach (Type configType in configTypes)
                     {
-                        TextAsset v = ResourcesComponent.Instance.GetAsset(configBundleName, configType.Name) as TextAsset;
+                        TextAsset v = ResComponent.Instance.LoadAssetSync<TextAsset>(configType.Name);
                         output[configType] = v.bytes;
+                        ResComponent.Instance.Release(v);
                     }
                 }
             }
