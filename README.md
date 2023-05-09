@@ -1,4 +1,5 @@
 # English: please use your browser to translate to english  
+# [YooAsset接入参考](Book/YooAsset%E6%8E%A5%E5%85%A5.md)
 
 # 熊猫的课程：网络游戏架构设计上线啦，有需要请加QQ:80081771
 
