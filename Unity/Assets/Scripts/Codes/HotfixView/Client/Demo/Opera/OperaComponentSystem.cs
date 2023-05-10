@@ -44,6 +44,22 @@ namespace ET.Client
                     C2M_TransferMap c2MTransferMap = new C2M_TransferMap();
                     self.ClientScene().GetComponent<SessionComponent>().Session.Call(c2MTransferMap).Coroutine();
                 }
+
+                if (Input.GetKeyDown(KeyCode.V))
+                {
+                    var go = GameObjectPoolComponent.Instance.SpawnSync("Unit");
+                    go.transform.SetParent(GlobalComponent.Instance.Unit);
+                    self.TestGOs.Enqueue(go);
+                }
+
+                if (Input.GetKeyDown(KeyCode.B))
+                {
+                    if (self.TestGOs.Count > 0)
+                    {
+                        var go = self.TestGOs.Dequeue();
+                        GameObjectPoolComponent.Instance.Restore(go);
+                    }
+                }
             }
         }
     }
