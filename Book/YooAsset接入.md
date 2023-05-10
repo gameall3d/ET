@@ -70,3 +70,6 @@ Wrapper的实现有参考[L大的文章](http://www.liuocean.com/2022/07/16/ji-y
 ### 3. 增加ResComponent
 新增一个ResComponent（因为ResourcesComponent被ET默认占用了，所以用一个接近的名字），用于统一上层对外资源加载的接口，这样以后可以方便的替换各种资源加载插件。在客户端初始中加上ResComponent，然后把项目中原先使用ResourcesComponent的地方替换成ResComponent,还有一些地方使用AssetsBundleHelper，也替换成YooAssetWrapper。
 这里会发现ResourcesComponent有两处添加，原因可以看这个[帖子](https://et-framework.cn/d/813-resourcescomponent)。
+
+### 4. 增加GameObjectPoolComponent
+为了快速的实例化对象，一般项目中都会有对象池系统，而Prefab又是从资源中加载出来，所以对象池和资源系统密不可分，所以这里在ResComponent的基础上加入一个GameObjectPoolComponent来实现对象池系统。这边参考了YooAsset作者的[对象池系统](https://github.com/gmhevinci/UniFramework/tree/main/UniFramework/UniPooling)。

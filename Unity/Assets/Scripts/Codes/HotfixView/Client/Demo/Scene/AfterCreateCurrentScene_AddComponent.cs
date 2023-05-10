@@ -6,6 +6,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, EventType.AfterCreateCurrentScene args)
         {
             scene.AddComponent<UIComponent>();
+            scene.AddComponent<GameObjectPoolComponent>();
             // scene.AddComponent<ResourcesLoaderComponent>();
             await ETTask.CompletedTask;
         }

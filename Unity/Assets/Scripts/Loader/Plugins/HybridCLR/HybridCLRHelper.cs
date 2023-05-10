@@ -22,6 +22,7 @@ namespace ET
                 byte[] bytes = (kv.Value as TextAsset).bytes;
                 RuntimeApi.LoadMetadataForAOTAssembly(bytes, HomologousImageMode.Consistent);
             }
+            YooAssetWrapper.ReleaseByTag("AotDlls");
         }
     }
 }
