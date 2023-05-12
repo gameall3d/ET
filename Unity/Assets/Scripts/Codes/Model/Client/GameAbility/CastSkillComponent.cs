@@ -1,6 +1,6 @@
 namespace ET
 {
-    public class CastSkillComponent: IAwake, IDestroy
+    public class CastSkillComponent: Entity, IAwake, IDestroy
     {
     
     }

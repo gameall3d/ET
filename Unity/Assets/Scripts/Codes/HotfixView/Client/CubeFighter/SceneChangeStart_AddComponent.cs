@@ -2,6 +2,7 @@ using CubeFighter.EventType;
 using ET;
 using ET.Client;
 using UnityEngine.SceneManagement;
+using YooAsset;
 using Scene = ET.Scene;
 
 namespace CubeFighter.Client
@@ -14,7 +15,7 @@ namespace CubeFighter.Client
             Scene currentScene = scene.CurrentScene();
             
             // 加载场景资源
-            await ResourcesComponent.Instance.LoadBundleAsync($"{currentScene.Name}.unity3d");
+            await ResComponent.Instance.LoadSceneAsync($"{currentScene.Name}", LoadSceneMode.Single, false);
             // 切换到map场景
 
             await SceneManager.LoadSceneAsync(currentScene.Name);

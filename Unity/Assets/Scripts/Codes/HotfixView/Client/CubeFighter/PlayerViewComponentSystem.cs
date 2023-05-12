@@ -18,7 +18,7 @@ namespace CubeFighter.Client
 
         public static void Awake(this PlayerViewComponent self)
         {
-            GameObject playerPrfb = (GameObject)ResourcesComponent.Instance.GetAsset("unit.unity3d", "Player");
+            GameObject playerPrfb = (GameObject)ResComponent.Instance.LoadAssetSync<GameObject>("Player");
             GameObject go = UnityEngine.Object.Instantiate(playerPrfb, GlobalComponent.Instance.Unit, true);
             self.UnitRoot = go;
         }

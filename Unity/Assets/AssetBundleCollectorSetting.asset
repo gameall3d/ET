@@ -90,16 +90,8 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Scenes/Map1.unity
-        CollectorGUID: a5294483f20f40d449699101bb428cda
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
-      - CollectPath: Assets/Scenes/Map2.unity
-        CollectorGUID: 064123f1e5067b249a9fd8967ddbde09
+      - CollectPath: Assets/Scenes/Main.unity
+        CollectorGUID: 17cce33f9586a3342a5264cf24176fca
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
