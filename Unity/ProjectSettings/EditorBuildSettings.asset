@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Map2.unity
     guid: 064123f1e5067b249a9fd8967ddbde09
   - enabled: 1
-    path: Assets/Scenes/Main.unity
+    path: Assets/Scenes/CubeFigther/Main.unity
     guid: 17cce33f9586a3342a5264cf24176fca
   m_configObjects: {}

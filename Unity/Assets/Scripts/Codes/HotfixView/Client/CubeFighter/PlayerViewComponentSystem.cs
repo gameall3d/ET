@@ -20,7 +20,7 @@ namespace CubeFighter.Client
         {
             GameObject playerPrfb = (GameObject)ResComponent.Instance.LoadAssetSync<GameObject>("Player");
             GameObject go = UnityEngine.Object.Instantiate(playerPrfb, GlobalComponent.Instance.Unit, true);
-            self.UnitRoot = go;
+            self.RootGO = go;
         }
     }
 }

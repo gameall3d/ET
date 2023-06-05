@@ -6,7 +6,7 @@ namespace CubeFighter.Client
     [ComponentOf(typeof(GameUnit))]
     public class PlayerViewComponent: Entity, IAwake, IDestroy
     {
-        public GameObject UnitRoot;
+        public GameObject RootGO;
     }
 }
 

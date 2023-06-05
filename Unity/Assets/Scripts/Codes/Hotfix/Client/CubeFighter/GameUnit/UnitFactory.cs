@@ -9,7 +9,7 @@ namespace CubeFighter.Client
             GameUnitComponent gameUnitComponent = currentScene.GetComponent<GameUnitComponent>();
             GameUnit gameUnit = gameUnitComponent.CreatePlayer();
             
-            NumericComponent numericComponent = gameUnit.AddComponent<NumericComponent>();
+            GameNumericComponent numericComponent = gameUnit.AddComponent<GameNumericComponent>();
 
             return gameUnit;
         }

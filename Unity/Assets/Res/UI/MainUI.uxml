@@ -1,13 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Top">
-        <ui:VisualElement name="HPGroup" style="flex-direction: row;">
-            <ui:Label text="HP:" display-tooltip-when-elided="true" style="-unity-text-align: middle-left;" />
-            <ui:ProgressBar name="HPBar" low-value="100" style="max-width: 200px; width: 200px;" />
+    <ui:VisualElement name="Root" style="align-items: stretch; justify-content: space-between; flex-direction: column; flex-grow: 1; flex-shrink: 1;">
+        <ui:VisualElement name="Top" style="flex-direction: row; align-items: flex-start; flex-grow: 0;">
+            <ui:VisualElement name="HPGroup" style="flex-direction: row; align-items: stretch; justify-content: flex-start;">
+                <ui:Label text="HP:" display-tooltip-when-elided="true" style="-unity-text-align: middle-left;" />
+                <ui:ProgressBar name="HPBar" low-value="100" style="max-width: 200px; width: 200px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Middle" style="flex-direction: row;">
+            <ui:VisualElement style="justify-content: flex-start; align-items: auto;" />
+            <ui:ListView focusable="true" name="PropertyList" style="flex-direction: row;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Bottom" style="flex-direction: row; flex-grow: 0; justify-content: flex-end;">
+            <ui:Button text="Attack" display-tooltip-when-elided="true" name="AttackButton" style="justify-content: flex-start; align-items: auto;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Middle" style="flex-direction: row;">
-        <ui:VisualElement style="width: 656px;" />
-        <ui:ListView focusable="true" name="PropertyList" style="flex-direction: row;" />
-    </ui:VisualElement>
-    <ui:VisualElement name="Bottom" />
 </ui:UXML>
