@@ -25,9 +25,6 @@ namespace ET.Client
             {
                 using (Root.Instance.Scene.AddComponent<ResComponent>())
                 {
-                    const string configBundleName = "gameconfigs.unity3d";
-                    ResourcesComponent.Instance.LoadBundle(configBundleName);
-                    
                     foreach (Type configType in configTypes)
                     {
                         TextAsset v = ResComponent.Instance.LoadAssetSync<TextAsset>(configType.Name);

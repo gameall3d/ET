@@ -43,33 +43,35 @@ namespace ET
 
 		private async ETTask CheckUpdate()
 		{
-			YooAssets.Initialize();
-			
 			await YooAssetWrapper.InitializeAsync(this.GlobalConfig.PlayMode);
-			string version = await YooAssetWrapper.UpdateStaticVersion();
-			Debug.Log(version);
-			var result = await YooAssetWrapper.UpdateManifest(version);
+			if (this.GlobalConfig.PlayMode == EPlayMode.HostPlayMode)
+			{
+				string version = await YooAssetWrapper.UpdateStaticVersion();
+				Debug.Log(version);
+				var result = await YooAssetWrapper.UpdateManifest(version);
 
-			if (!result)
-			{
-				UICheckUpdate.Instance.SetMessage("Update Manifest Failed");
-			}
+				if (!result)
+				{
+					UICheckUpdate.Instance.SetMessage("Update Manifest Failed");
+				}
 			
-			YooAssetWrapper.GetDownloadSize();
-			result = await YooAssetWrapper.Download();
-			if (result)
-			{
-				if (this.GlobalConfig.PlayMode == EPlayMode.HostPlayMode)
+				YooAssetWrapper.GetDownloadSize();
+				result = await YooAssetWrapper.Download();
+				if (result)
 				{
 					UICheckUpdate.Instance.Remove();
+					Game.AddSingleton<CodeLoader>().Start();
 				}
-
-				Game.AddSingleton<CodeLoader>().Start();
+				else
+				{
+					UICheckUpdate.Instance.SetMessage("Download Resource Failed");
+				}
 			}
 			else
 			{
-				UICheckUpdate.Instance.SetMessage("Download Resource Failed");
+				Game.AddSingleton<CodeLoader>().Start();
 			}
+
 		}
 
 		private void Update()

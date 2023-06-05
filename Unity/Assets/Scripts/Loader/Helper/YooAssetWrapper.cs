@@ -39,6 +39,8 @@ namespace YooAsset
 
         public static ETTask<AsyncOperationBase> InitializeAsync(EPlayMode playMode, string packageName = "DefaultPackage")
         {
+            YooAssets.Initialize();
+
             var package = YooAssets.TryGetPackage(packageName);
             if (package == null)
             {

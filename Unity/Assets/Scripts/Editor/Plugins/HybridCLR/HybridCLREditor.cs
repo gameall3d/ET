@@ -31,5 +31,35 @@ namespace ET
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
+        
+        
+        [MenuItem("HybridCLR/CopyAotDllToBundles")]
+        public static void CopyAotDllToBundles()
+        {
+            BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
+            string fromDir = Path.Combine(HybridCLRSettings.Instance.strippedAOTDllOutputRootDir, target.ToString());
+            string toDir = "Assets/Bundles/AotDlls";
+            if (Directory.Exists(toDir))
+            {
+                DirectoryInfo di = new DirectoryInfo(toDir);
+                foreach (FileInfo file in di.EnumerateFiles())
+                {
+                    file.Delete(); 
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(toDir);
+            }
+
+            AssetDatabase.Refresh();
+
+            foreach (string aotDll in HybridCLRSettings.Instance.patchAOTAssemblies)
+            {
+                File.Copy(Path.Combine(fromDir, aotDll), Path.Combine(toDir, $"{aotDll}.bytes"), true);
+            }
+
+            AssetDatabase.Refresh();
+        }
     }
 }
