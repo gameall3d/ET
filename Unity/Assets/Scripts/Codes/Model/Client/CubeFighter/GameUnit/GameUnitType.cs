@@ -1,4 +1,4 @@
-namespace CubeFighter
+namespace ET
 {
     public enum GameUnitType
     {

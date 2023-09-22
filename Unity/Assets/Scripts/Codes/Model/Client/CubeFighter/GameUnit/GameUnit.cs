@@ -1,13 +1,12 @@
-using System.Numerics;
-using ET;
+using Unity.Mathematics;
 
-namespace CubeFighter
+namespace ET
 {
     [ChildOf(typeof(GameUnitComponent))]
     public class GameUnit: Entity, IAwake, IDestroy
     {
         public GameUnitType GameUnitType;
-        public Vector2 Position;
+        public float2 Position;
     }
 }
 

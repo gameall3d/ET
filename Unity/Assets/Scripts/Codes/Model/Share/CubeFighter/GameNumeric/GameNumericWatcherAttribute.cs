@@ -1,6 +1,6 @@
 ﻿using ET;
 
-namespace CubeFighter
+namespace ET
 {
     public class GameNumericWatcherAttribute : BaseAttribute
     {

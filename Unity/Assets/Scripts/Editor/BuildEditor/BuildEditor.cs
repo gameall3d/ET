@@ -175,6 +175,11 @@ namespace ET
 			}
 
 			GUILayout.Space(5);
+			
+			if (GUILayout.Button("GameConfigExporter"))
+			{
+				ToolsEditor.GameConfigExporter();
+			}
 		}
 		
 		private static void AfterCompiling()

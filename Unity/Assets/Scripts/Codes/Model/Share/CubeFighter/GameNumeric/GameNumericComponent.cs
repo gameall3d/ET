@@ -3,7 +3,7 @@ using ET;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
 
-namespace CubeFighter
+namespace ET
 {
     [FriendOf(typeof (GameNumericComponent))]
     [FriendOf(typeof (Modifier))]

@@ -1,3 +1,5 @@
+using ET;
+
 namespace CubeFighter.EventType
 {
     public struct SceneChangeStart

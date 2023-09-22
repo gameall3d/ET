@@ -1,6 +1,4 @@
-﻿using ET;
-
-namespace CubeFighter
+﻿namespace ET
 {
     [ChildOf()]
     public class Modifier:Entity,IAwake<int>

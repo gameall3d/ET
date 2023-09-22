@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using ET;
 
-namespace CubeFighter
+namespace ET
 {
     [ComponentOf(typeof(Scene))]
     public class GameUnitComponent: Entity, IAwake, IDestroy

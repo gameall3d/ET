@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using ET;
 
-namespace CubeFighter
+namespace ET
 {
     [FriendOf(typeof(GameUnitComponent))]
     [FriendOf(typeof(GameUnit))]

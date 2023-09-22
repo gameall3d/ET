@@ -90,7 +90,7 @@ MonoBehaviour:
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/Scenes/Main.unity
+      - CollectPath: Assets/Scenes/CubeFigther/Main.unity
         CollectorGUID: 17cce33f9586a3342a5264cf24176fca
         CollectorType: 0
         AddressRuleName: AddressByFileName
